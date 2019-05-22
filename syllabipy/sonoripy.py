@@ -42,12 +42,12 @@ def SonoriPy(word, IPA=False):
 
     # SONORITY HIERARCHY, MODIFY FOR LANGUAGE BELOW
     # categories should be collapsed into more general groups
-    vowels = 'aeiouyàáâäæãåāèéêëēėęîïíīįìôöòóœøōõûüùúūůÿ'
-    approximates = ''
-    nasals = 'lmnrw'
-    fricatives = 'zvsf'
-    affricates = ''
-    stops = 'bcdgtkpqxhj'
+    vowels = 'a,æ,aː,æː,ʌ,ʌː,ʔu,ʔʊ,ʔᵘ,ʔᶷ,ʔi,ʔ\u2071,e,ɛ,eː,ɪ,ɨ,i,iː,ɔ,o,oː,ʊ,u,ʊ\u031E,uː'
+    approximates = 'w,j,l,ʔw,ʔj,'
+    nasals = 'm,n,ʔm,ʔn'
+    fricatives = 's,h,ʁ,x,χ,ɬ'
+    affricates = 'ʣ,ʔt\u0361ɬ,ʦ,ʔʦ'
+    stops = 'b,d,g,t,k,p,q,ʔ,ɟ,ʔk,ʔɢ,ʔq,ʔɟ,ʔg,ʔp,ʔb,ʔt,ʔd'
 
     # SONORITY HIERARCHY for IPà
     if IPA:
@@ -55,28 +55,32 @@ def SonoriPy(word, IPA=False):
         vowelcount = 0  # if vowel count is 1, syllable is automatically 1
         sylset = []  # to collect letters and corresponding values
         for letter in word.strip(".:;?!)('" + '"'):
-            if letter.lower() in 'aɔʌã':
+            if letter.lower() in 'a,æ,aː,æː,ʌ,ʌː,ɔː':
+                sylset.append((letter, 11))
+                vowelcount += 1  # to check for monosyllabic words
+            elif letter.lower() in 'e,ɛ,eː,o,oː':
+                sylset.append((letter, 10))
+                vowelcount += 1  # to check for monosyllabic words
+            elif letter.lower() in 'ʊ,u,ʊu\031E,uː,ɪ,ɨ,i,iː,ʔu,ʔʊ,ʔᵘ,ʔᶷ,ʔi,ʔ\u2071':
                 sylset.append((letter, 9))
                 vowelcount += 1  # to check for monosyllabic words
-            elif letter.lower() in 'eéẽɛøoõ':
+            elif letter.lower() in 'w,j,ʔw,ʔj':
                 sylset.append((letter, 8))
-                vowelcount += 1  # to check for monosyllabic words
-            elif letter.lower() in 'iu':
+            elif letter.lower() in 'l':
                 sylset.append((letter, 7))
-                vowelcount += 1  # to check for monosyllabic words
-            elif letter.lower() in 'jwɥh':
+            elif letter.lower() in 'm,n,ʔm,ʔn':
                 sylset.append((letter, 6))
-            elif letter.lower() in 'rl':
+            elif letter.lower() in 'ʁ':
                 sylset.append((letter, 5))
-            elif letter.lower() in 'mn':
+            elif letter.lower() in 's,h,x,χ,ɬ':
                 sylset.append((letter, 4))
-            elif letter.lower() in 'zvðʒ':
+            elif letter.lower() in 'ʣ':
                 sylset.append((letter, 3))
-            elif letter.lower() in 'sfθʃ':
+            elif letter.lower() in 'ʔt\u0361ɬ,ʦ,ʔʦ':
                 sylset.append((letter, 2))
-            elif letter.lower() in 'bdg':
+            elif letter.lower() in 'b,d,g,ɟ,ʔɢ,ʔɟ,ʔg,ʔb,ʔd':
                 sylset.append((letter, 1))
-            elif letter.lower() in 'ptkx':
+            elif letter.lower() in 't,k,p,q,ʔ,ʔk,ʔq,ʔp,ʔt':
                 sylset.append((letter, 0))
             else:
                 sylset.append((letter, 0))
