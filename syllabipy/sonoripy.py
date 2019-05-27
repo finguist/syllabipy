@@ -42,7 +42,7 @@ def SonoriPy(word, IPA=False):
 
     # SONORITY HIERARCHY, MODIFY FOR LANGUAGE BELOW
     # categories should be collapsed into more general groups
-    vowels = ['a','æ','a\u02D0','æ\u02D0','ʌ','ʌ\u02D0','ʔᵘ','ʔᶷ','ʔ\u2071','e','ɛ','eː','ɪ','ɨ','i','i\u02D0','ɔ','o','o\u02D0','ʊ','u','ʊ\u031E','u\u02D0'']
+    vowels = ['a','æ','a\u02D0','æ\u02D0','ʌ','ʌ\u02D0','ʔᵘ','ʔᶷ','ʔ\u2071','e','ɛ','eː','ɪ','ɨ','i','i\u02D0','ɔ','o','o\u02D0','ʊ','u','ʊ\u031E','u\u02D0']
     approximates = ['w','j','l']
     nasals = ['m','n']
     fricatives = ['s','h','ʁ','x','χ','ɬ']
