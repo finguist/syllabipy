@@ -15,7 +15,7 @@ def getOnsets(text, threshold=.0002, clean=True):
     takes text and yields list of onsets and words
     '''
 
-    vowels = 'aeiouyàáâäæãåāèéêëēėęîïíīįìôöòóœøōõûüùúūůÿ'
+    vowels = '['a','æ','a\u02D0','æ\u02D0','ʌ','ʌ\u02D0','ʔᵘ','ʔᶷ','ʔ\u2071','e','ɛ','eː','ɪ','ɨ','i','i\u02D0','ɔ','o','o\u02D0','ʊ','u','ʊ\u031E','u\u02D0'']'
 
     if clean:
         tokens = cleantext(text).split()
@@ -57,7 +57,7 @@ def LegaliPy(word, onsets):
     '''
 
     longest_onset = len(max(onsets, key=len))
-    vowels = 'aeiouyàáâäæãåāèéêëēėęîïíīįìôöòóœøōõûüùúūůÿ'
+    vowels = '['a','æ','a\u02D0','æ\u02D0','ʌ','ʌ\u02D0','ʔᵘ','ʔᶷ','ʔ\u2071','e','ɛ','eː','ɪ','ɨ','i','i\u02D0','ɔ','o','o\u02D0','ʊ','u','ʊ\u031E','u\u02D0'']'
     vowelcount = 0
     revword = word[::-1]  # reverse word to build onsets from back
 
