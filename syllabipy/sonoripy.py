@@ -46,16 +46,15 @@ def SonoriPy(word, IPA=False):
     approximates = ['w','j','l']
     nasals = ['m','n']
     fricatives = ['s','h','ʁ','x','χ','ɬ']
-    affricates = ['ʣ'.'t\u0361ɬ','ʦ']
+    affricates = ['ʣ','t\u0361ɬ','ʦ']
     stops = ['b','d','g','t','k','p','q','ʔ','ɟ','ɢ']
-    remove_secondary_art_pattern = re.compile('ʷ','ʰ','ˀ','ʲ')
 
     # SONORITY HIERARCHY for IPà
     if IPA:
         # categories can be collapsed into more general groups
         vowelcount = 0  # if vowel count is 1, syllable is automatically 1
         sylset = []  # to collect letters and corresponding values
-        word = re.sub(remove_secondary_art_pattern, "", word)
+        
         for letter in word.strip(".;?!)('" + '"'):
             if letter.lower() in ['a','æ','a\u02D0','æ\u02D0','ʌ','ʌ\u02D0','ɔ\u02D0']:
                 sylset.append((letter, 11))
@@ -70,7 +69,7 @@ def SonoriPy(word, IPA=False):
                 sylset.append((letter, 8))
             elif letter.lower() in 'l':
                 sylset.append((letter, 7))
-            elif letter.lower() in ['m','n'']:
+            elif letter.lower() in ['m','n']:
                 sylset.append((letter, 6))
             elif letter.lower() in 'ʁ':
                 sylset.append((letter, 5))
