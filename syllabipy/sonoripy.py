@@ -2,6 +2,7 @@ from __future__ import unicode_literals  # for python2 compatibility
 # -*- coding: utf-8 -*-
 # created at UC Berkeley 2015
 # Authors: Christopher Hench & Alex Estes © 2016
+# Adapted for Gitksan by Fineen Davis
 
 import re
 import codecs
@@ -42,27 +43,27 @@ def SonoriPy(word, IPA=False):
 
     # SONORITY HIERARCHY, MODIFY FOR LANGUAGE BELOW
     # categories should be collapsed into more general groups
-    vowels = ['a','æ','a\u02D0','æ\u02D0','ʌ','ʌ\u02D0','ʔᵘ','ʔᶷ','ʔ\u2071','e','ɛ','eː','ɪ','ɨ','i','i\u02D0','ɔ','o','o\u02D0','ʊ','u','ʊ\u031E','u\u02D0']
+    vowels = ['a','æ','a\u02D0','æ\u02D0','ʌ','ʌ\u02D0','\u0294ᵘ','\u0294ᶷ','\u0294\u2071','e','ɛ','eː','\u026A','ɨ','i','i\u02D0','\u0254','o','o\u02D0','ʊ','u','ʊ\u031E','u\u02D0']
     approximates = ['w','j','l']
     nasals = ['m','n']
-    fricatives = ['s','h','ʁ','x','χ','ɬ']
-    affricates = ['ʣ','t\u0361ɬ','ʦ']
-    stops = ['b','d','g','t','k','p','q','ʔ','ɟ','ɢ']
+    fricatives = ['s','h','ʁ','x','\u0367','\u026C']
+    affricates = ['\u02A3','t\u0361\u026C','\u02A6']
+    stops = ['b','d','g','t','k','p','q','\u0294','ɟ','\u0262']
 
     # SONORITY HIERARCHY for IPà
     if IPA:
         # categories can be collapsed into more general groups
         vowelcount = 0  # if vowel count is 1, syllable is automatically 1
         sylset = []  # to collect letters and corresponding values
-        
+
         for letter in word.strip(".;?!)('" + '"'):
-            if letter.lower() in ['a','æ','a\u02D0','æ\u02D0','ʌ','ʌ\u02D0','ɔ\u02D0']:
+            if letter.lower() in ['a','æ','a\u02D0','æ\u02D0','ʌ','ʌ\u02D0','\u0254']:
                 sylset.append((letter, 11))
                 vowelcount += 1  # to check for monosyllabic words
             elif letter.lower() in ['e','ɛ','e\u02D0','o','o\u02D0']:
                 sylset.append((letter, 10))
                 vowelcount += 1  # to check for monosyllabic words
-            elif letter.lower() in ['ʊ','u','ʊ\031E','u\u02D0','ɪ','ɨ','i\u02D0','i','ʔᵘ','ʔᶷ','ʔ\u2071']:
+            elif letter.lower() in ['ʊ','u','ʊ\031E','u\u02D0','\u026A','ɨ','i\u02D0','i','\u0294ᵘ','\u0294ᶷ','\u0294\u2071']:
                 sylset.append((letter, 9))
                 vowelcount += 1  # to check for monosyllabic words
             elif letter.lower() in ['w','j']:
@@ -73,15 +74,15 @@ def SonoriPy(word, IPA=False):
                 sylset.append((letter, 6))
             elif letter.lower() in 'ʁ':
                 sylset.append((letter, 5))
-            elif letter.lower() in ['s','h','x','χ','ɬ']:
+            elif letter.lower() in ['s','h','x','\u0367','\u026C']:
                 sylset.append((letter, 4))
-            elif letter.lower() in 'ʣ':
+            elif letter.lower() in '\u02A3':
                 sylset.append((letter, 3))
-            elif letter.lower() in ['t\u0361ɬ','ʦ']:
+            elif letter.lower() in ['t\u0361\u026C','\u02A6']:
                 sylset.append((letter, 2))
-            elif letter.lower() in ['b','d','g','ɟ','ɢ','ɟ']:
+            elif letter.lower() in ['b','d','g','ɟ','\u0262']:
                 sylset.append((letter, 1))
-            elif letter.lower() in ['t','k','p','q','ʔ']:
+            elif letter.lower() in ['t','k','p','q','\u0294']:
                 sylset.append((letter, 0))
             else:
                 sylset.append((letter, 0))
